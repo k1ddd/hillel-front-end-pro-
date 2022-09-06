@@ -32,4 +32,4 @@ console.log("average =", average);
 console.log("circle radius = ", circleRadius);
 console.log("length = ", length);
 console.log("area = ", area);
-console.log("PI = ", PI);
+
