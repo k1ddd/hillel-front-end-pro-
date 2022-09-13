@@ -1,4 +1,4 @@
-console.log(`Sum = `, +(0.1 + 0.2).toFixed(1));
+console.log(`Sum = `, +(0.1 + 0.2).toFixed(2));
 
 const yourLogin = prompt(`Ведіть Ваш логін`);
 const yourPassword = prompt(`Ведіть Ваш пароль`);
