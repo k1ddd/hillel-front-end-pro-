@@ -6,13 +6,20 @@
  в кожній з функцій повинно використовуватись якомога більше
  характеристик конкретної Людини на якій ця функція викликається(підказка: тут треба використатии call / apply / bind) */
 
-function CreateHumanList(name, age, sex, nationality, country, []) {
+function CreateHumanList(
+  name,
+  age,
+  sex,
+  nationality,
+  country,
+  listOfCountries
+) {
   this.nameOfHuman = name;
   this.ageOfHuman = age;
   this.sexOfHuman = sex;
   this.nationalityOfHuman = nationality;
   this.countryOfHuman = country;
-  this.countryToTravel = [];
+  this.countryToTravel = listOfCountries;
 }
 
 const humanMe = new CreateHumanList(
@@ -36,16 +43,14 @@ wakeUp.apply(humanMe);
 
 const sleep = function () {
   console.log(
-    `I'm very tired today, I'm going to sleep and dream about ${["Portugal"]}.`
+    `I'm very tired today, I'm going to sleep and dream about ${this.countryToTravel[3]}.`
   );
 };
 sleep.apply(humanMe);
 
 const travel = function () {
   console.log(
-    `At my ${this.ageOfHuman} years old, I plan to go ${[
-      "Poland",
-    ]} and they will welcome me there because I am ${this.nationalityOfHuman}.`
+    `At my ${this.ageOfHuman} years old, I plan to go ${this.countryToTravel[2]}, and they will welcome me there because I am ${this.nationalityOfHuman}.`
   );
 };
 travel.apply(humanMe);
@@ -53,30 +58,20 @@ travel.apply(humanMe);
 // // 2.
 // /*  Створити власну реалізацію методу.bind */
 
-function bind(fn, context, ...rest) {
-  return function (...args) {
-    const uuid = Date.now().toString();
-    context[uuid] = fn;
-    const res = context[uuid](...rest, ...args);
-    delete context[uuid];
-    return res;
-  };
-}
 const cardOfDog = {
-  breedOfDog: "",
-  nameOfDog: "",
-  fullInfo() {
-    return `I love my ${this.breedOfDog} his named is ${this.nameOfDog}.`;
-  },
+  breedOfDog: "Amstaff",
+  nameOfDog: "Oscar",
 };
 
-function getFullProfile(breedOfDog, nameOfDog) {
-  this.breedOfDog = breedOfDog;
-  this.nameOfDog = nameOfDog;
-  return this.fullInfo();
+function getFullProfile() {
+  console.log(`I love my ${this.breedOfDog} his named is ${this.nameOfDog}.`);
 }
 
-bind(getFullProfile, cardOfDog, "Amstaff", "Oscar")();
+myOwnBind = function (fn, context) {
+  return fn.apply(context);
+};
+
+myOwnBind(getFullProfile, cardOfDog);
 
 // // 3.
 
@@ -84,94 +79,27 @@ bind(getFullProfile, cardOfDog, "Amstaff", "Oscar")();
 // Функція повинна перевіряти чи ці 2 обʼєкти
 // абсолютно ідентичні та повертає результат у зрозумілому форматі */
 
-function deepCompare() {
-  let i, l, leftChain, rightChain;
-  function compareTwoObjects(x, y) {
-    let p;
-    if (
-      isNaN(x) &&
-      isNaN(y) &&
-      typeof x === "number" &&
-      typeof y === "number"
-    ) {
-      return true;
-    }
-    if (x === y) {
-      return true;
-    }
-    if (
-      (typeof x === "function" && typeof y === "function") ||
-      (x instanceof Date && y instanceof Date) ||
-      (x instanceof RegExp && y instanceof RegExp) ||
-      (x instanceof String && y instanceof String) ||
-      (x instanceof Number && y instanceof Number)
-    ) {
-      return x.toString() === y.toString();
-    }
-    if (!(x instanceof Object && y instanceof Object)) {
-      return false;
-    }
-    if (x.isPrototypeOf(y) || y.isPrototypeOf(x)) {
-      return false;
-    }
-    if (x.constructor !== y.constructor) {
-      return false;
-    }
-    if (x.prototype !== y.prototype) {
-      return false;
-    }
-    if (leftChain.indexOf(x) > -1 || rightChain.indexOf(y) > -1) {
-      return false;
-    }
-    for (p in y) {
-      if (y.hasOwnProperty(p) !== x.hasOwnProperty(p)) {
-        return false;
-      } else if (typeof y[p] !== typeof x[p]) {
-        return false;
-      }
-    }
-    for (p in x) {
-      if (y.hasOwnProperty(p) !== x.hasOwnProperty(p)) {
-        return false;
-      } else if (typeof y[p] !== typeof x[p]) {
-        return false;
-      }
-      switch (typeof x[p]) {
-        case "object":
-        case "function":
-          leftChain.push(x);
-          rightChain.push(y);
-          if (!compareTwoObjects(x[p], y[p])) {
-            return false;
-          }
-          leftChain.pop();
-          rightChain.pop();
-          break;
-        default:
-          if (x[p] !== y[p]) {
-            return false;
-          }
-          break;
-      }
-    }
+function deepEqual(obj1, obj2) {
+  if (obj1 === obj2) {
     return true;
-  }
-  if (arguments.length < 1) {
-    return true;
-  }
-  for (i = 1, l = arguments.length; i < l; i++) {
-    leftChain = [];
-    rightChain = [];
-    if (!compareTwoObjects(arguments[0], arguments[i])) {
+  } else {
+    if (Object.keys(obj1).length !== Object.keys(obj2).length) {
       return false;
+    }
+    for (var propName in obj1) {
+      if (!obj2.hasOwnProperty(propName)) {
+        return false;
+      }
+      if (obj1[propName].valueOf() !== obj2[propName].valueOf()) {
+        if (!deepEqual(obj1[propName], obj2[propName])) {
+          return false;
+        }
+      }
     }
   }
   return true;
 }
-
-deepCompare(1, null); // false
-deepCompare(NaN, NaN); // true
-deepCompare("smoke", "smoke"); // true
+deepEqual();
 
 //4.
 
