@@ -248,14 +248,12 @@ const mostExpensive = productLists.sort(
     currentValue.productPrice - sumProduct.productPrice
 )[0];
 
-const averagePriceOfAllProducts = +(totalAmoutn / productLists.length).toFixed(
-  1
-);
+const averagePrice = +(totalAmoutn / productLists.length).toFixed(1);
 
 const textData = [
   `<span class="sum"> The total amount of your cart is : ${totalAmoutn}.</span>`,
   `<span class="sum">The most expensive product on this list is: ${mostExpensive.productName} its price : ${mostExpensive.productPrice}.</span>`,
-  `<span class="sum"> Arage price of a grocery basket : ${averagePriceOfAllProducts}.</span>`,
+  `<span class="sum"> Arage price of a grocery basket : ${averagePrice}.</span>`,
 ];
 
 function createAndAddToInnerHTML() {
