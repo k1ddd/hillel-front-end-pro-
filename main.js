@@ -1,267 +1,86 @@
-const UA = `./UA.png`;
-const USA = `./USA.png`;
-const CHZ = `./CHZ.png`;
+const howSec = document.querySelector("#push");
+const newNumber = document.querySelector("#new__task input");
 
-const productLists = [
-  {
-    productName: "Bread",
-    productData: {
-      weight: 200,
-      certificate: true,
-      dateOfExpiry: "27/10/22",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: UA,
-    productPrice: 11.75,
-  },
-  {
-    productName: "Water",
-    productData: {
-      weight: 1500,
-      certificate: true,
-      dateOfExpiry: "21/12/23",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: UA,
-    productPrice: 17,
-  },
-  {
-    productName: "Wine",
-    productData: {
-      weight: 750,
-      certificate: true,
-      dateOfExpiry: "21/12/22",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: USA,
-    productPrice: 150,
-  },
-  {
-    productName: "Apple",
-    productData: {
-      weight: 2000,
-      certificate: true,
-      dateOfExpiry: "11/01/23",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: UA,
-    productPrice: 18,
-  },
-  {
-    productName: "Flour",
-    productData: {
-      weight: 1000,
-      certificate: false,
-      dateOfExpiry: "10/10/23",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: UA,
-    productPrice: 80,
-  },
-  {
-    productName: "Egg",
-    productData: {
-      weight: 300,
-      certificate: true,
-      dateOfExpiry: "21/11/22",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: UA,
-    productPrice: 60,
-  },
-  {
-    productName: "Milk",
-    productData: {
-      weight: 1000,
-      certificate: true,
-      dateOfExpiry: "22/12/22",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: CHZ,
-    productPrice: 11.75,
-  },
-  {
-    productName: "Rice",
-    productData: {
-      weight: 1000,
-      certificate: true,
-      dateOfExpiry: "23/12/23",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: UA,
-    productPrice: 59,
-  },
-  {
-    productName: "Buckwheat",
-    productData: {
-      weight: 1000,
-      certificate: true,
-      dateOfExpiry: "15/12/23",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: UA,
-    productPrice: 70,
-  },
-  {
-    productName: "Bun",
-    productData: {
-      weight: 150,
-      certificate: true,
-      dateOfExpiry: "29/10/22",
-      sugarFree: false,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: UA,
-    productPrice: 25,
-  },
-  {
-    productName: "Tea",
-    productData: {
-      weight: 200,
-      certificate: false,
-      dateOfExpiry: "21/11/22",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: CHZ,
-    productPrice: 45.5,
-  },
-  {
-    productName: "Coffee",
-    productData: {
-      weight: 250,
-      certificate: false,
-      dateOfExpiry: "21/01/23",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: UA,
-    productPrice: 140,
-  },
-  {
-    productName: "Beer",
-    productData: {
-      weight: 550,
-      certificate: true,
-      dateOfExpiry: "11/02/23",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: UA,
-    productPrice: 51,
-  },
-  {
-    productName: "Seasoning",
-    productData: {
-      weight: 400,
-      certificate: true,
-      dateOfExpiry: "29/10/23",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: CHZ,
-    productPrice: 78.5,
-  },
-  {
-    productName: "Vegetables",
-    productData: {
-      weight: 3000,
-      certificate: true,
-      dateOfExpiry: "10/11/22",
-      sugarFree: true,
-    },
-    productProvider: "FOP Skyba R.R.",
-    productCountry: USA,
-    productPrice: 275,
-  },
-];
-
-const div = document.createElement("div");
-
-const ul = document.createElement("ul");
-document.body.append(div);
-div.append(ul);
-
-function groceryBasket(
-  productName,
-  productPrice,
-  certificate,
-  productCountry,
-  weight,
-  dateOfExpiry,
-  sugarFree,
-  productProvider
-) {
-  return `<div class ="product__item">
-   <span class = "name__product">${productName}</span>
-    <span> Price : ${productPrice} </span>
-    <span> Country <img src = "${productCountry}" alt = "IMG"> </span> 
-  </div>
-  <div>
-    Date of expiry: ${dateOfExpiry},  Sugar Free: ${sugarFree}, Product provider: ${productProvider}, Weight: ${weight}, 
-    Sertificate: ${certificate} <span class= "warning">${
-    certificate ? "" : "!"
-  }</span>
-  </div>`;
-}
-
-productLists.forEach((product) => {
-  const {
-    productName,
-    productPrice,
-    productData,
-    productCountry,
-    productProvider,
-  } = product;
-
-  const li = document.createElement("li");
-  li.className = "product";
-  li.innerHTML = `${groceryBasket(
-    productName,
-    productPrice,
-    productData.certificate,
-    productCountry,
-    productData.weight,
-    productData.dateOfExpiry,
-    productData.sugarFree,
-    productProvider
-  )}`;
-  ul.append(li);
+howSec.addEventListener("click", function () {
+  if (newNumber.value) {
+    const newTask = document.createElement("span");
+    newTask.classList.add("new__task__to__do");
+    newTask.innerHTML = ` the end of Russia will come through ${newNumber.value} sec`;
+    newNumber.value = "";
+    tasks.prepend(newTask);
+  }
 });
 
-const totalAmoutn = productLists.reduce(
-  (sumProduct, currentValue) => sumProduct + currentValue.productPrice,
-  0
-);
+const btnTime = document.querySelector("#btnTime");
+const selectDate = document.querySelector("#startDate");
+const countdown = document.querySelector("#countdown");
 
-const mostExpensive = productLists.sort(
-  (sumProduct, currentValue) =>
-    currentValue.productPrice - sumProduct.productPrice
-)[0];
+let calcDate = function () {
+  setInterval(() => {
+    let now = new Date().getTime();
+    let countDownDate = new Date(selectDate.value).getTime();
+    let distance = countDownDate - now;
 
-const averagePrice = +(totalAmoutn / productLists.length).toFixed(1);
+    let years = Math.floor(distance / 31536000000);
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-const textData = [
-  `<span class="sum"> The total amount of your cart is : ${totalAmoutn}.</span>`,
-  `<span class="sum">The most expensive product on this list is: ${mostExpensive.productName} its price : ${mostExpensive.productPrice}.</span>`,
-  `<span class="sum"> Arage price of a grocery basket : ${averagePrice}.</span>`,
-];
+    document.getElementById(
+      "countdown"
+    ).innerHTML = `${years} Year(s) ${days} day(s) ${hours} hour(s) ${minutes} minute(s) ${seconds} second(s)`;
+    if (distance < 0) {
+      clearInterval();
+      document.getElementById("countdown").innerHTML = "The countdown is over";
+    }
+  }, 1000);
+};
 
-function createAndAddToInnerHTML() {
-  textData.forEach((element) => {
-    const h4 = document.createElement("h4");
-    h4.innerHTML = element;
-    div.append(h4);
-  });
+btnTime.addEventListener("click", calcDate);
+
+const phone = document.querySelector("#phone");
+const ram = document.querySelector("#RAM");
+const builtMemory = document.querySelector("#built__memory");
+const calTotalPrice = document.querySelector("#calc__price");
+const dataOutput = document.querySelector("#data__output");
+
+function calculatePhoneCost() {
+  let sum = 0;
+
+  if (phone.value === "iPhone") {
+    sum = 1000;
+  } else if (phone.value === "Samsung") {
+    sum = 500;
+  } else if (phone.value === "Pixel") {
+    sum = 250;
+  } else if (phone.value === "OnePlus") {
+    sum = 150;
+  }
+  if (ram.value === "2") {
+    sum += 20;
+  } else if (ram.value === "4") {
+    sum += 40;
+  } else if (ram.value === "6") {
+    sum += 60;
+  } else if (ram.value === "8") {
+    sum += 80;
+  }
+
+  if (builtMemory.value === "64") {
+    sum += 50;
+  } else if (builtMemory.value === "128") {
+    sum += 100;
+  } else if (builtMemory.value === "256") {
+    sum += 150;
+  } else if (builtMemory.value === "512") {
+    sum += 200;
+  }
+  const totalAmountPrice = document.createElement("p");
+  totalAmountPrice.innerHTML = `<p>Your ${phone.value} costs : ${sum}$</p>`;
+  data__output.append(totalAmountPrice);
 }
 
-createAndAddToInnerHTML();
+calTotalPrice.addEventListener("click", calculatePhoneCost);
