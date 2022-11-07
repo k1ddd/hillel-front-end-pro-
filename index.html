@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home_Work 13</title>
+    <link rel="stylesheet" href="./slyle.css">
+</head>
+
+<body>
+
+
+
+    <div class="container">
+        <div id="new__task">
+
+            <input type="number" min="1" placeholder="Time before the disappearance of the Russians">
+
+            <button id="push"> Start timeout </button>
+        </div>
+        <div id="tasks">
+        </div>
+    </div>
+    <input type="date" id="startDate">
+    <button id="btnTime">START</button>
+    <p id="countdown"> </p>
+    <div class="wrapper">
+        <div class="select__phone">
+            <p>Select phone</p>
+            <select name="phone" id="phone">
+                <option value="iPhone">iPhone</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Pixel">Pixel</option>
+                <option value="OnePlus ">OnePlus</option>
+            </select>
+
+        </div>
+        <div class="select__RAM">
+            <p>Select RAM</p>
+            <select name="RAM" id="RAM">
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+            </select>
+
+        </div>
+        <div class="select__built__memory">
+            <p>Select memory</p>
+            <select name="built__memory" id="built__memory">
+                <option value="64">64</option>
+                <option value="128">128</option>
+                <option value="256">256</option>
+                <option value="512">512</option>
+            </select>
+            <button id="calc__price"> Calculate Price</button>
+            <div></div>
+
+        </div>
+        <p id="data__output">Information field</p>
+    </div>
+
+    <script src="./main.js"></script>
+
+</body>
+
+</html>
