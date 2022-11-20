@@ -1,97 +1,40 @@
 body {
   font-family: Inter, -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
     sans-serif;
-  background-color: darkslategrey;
+  background-color: darkslategrey !important;
 }
 
-.wrapper {
-  display: flex;
-  justify-content: center;
-}
-h1 {
-  color: whitesmoke;
+#reuslts img {
+  width: 100%;
+  height: 100%;
 }
 
-.cloudiness {
-  color: sandybrown;
-}
-
-.date {
-  background-color: sandybrown;
-  border-radius: 8px;
-  padding: 7px;
-}
-
-p {
-  font-weight: 700;
-}
-
-select {
-  background-color: sandybrown;
-  width: 128px;
-  height: 50px;
-  box-shadow: rgb(39 174 96 / 15%) 0 4px 9px;
-  border-radius: 8px;
-  border-style: none;
-  text-align: center;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  outline: none;
-  overflow: hidden;
-}
-
-#btn {
-  appearance: none;
-  backface-visibility: hidden;
-  background-color: #27ae60;
-  border-radius: 8px;
-  border-style: none;
-  box-shadow: rgba(39, 174, 96, 0.15) 0 4px 9px;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: normal;
-  line-height: 1.5;
-  outline: none;
-  overflow: hidden;
-  padding: 13px 20px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  transform: translate3d(0, 0, 0);
-  transition: all 0.3s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: top;
-  white-space: nowrap;
-}
-
-#btn:hover {
-  background-color: #1e8449;
-  opacity: 1;
-  transform: translateY(0);
-  transition-duration: 0.35s;
-}
-
-#btn:active {
-  transform: translateY(2px);
-  transition-duration: 0.35s;
-}
-
-#btn:hover {
-  box-shadow: rgba(39, 174, 96, 0.2) 0 6px 12px;
-}
-
-.day__night {
+.title {
   color: wheat;
 }
 
-.temp {
-  color: lemonchiffon;
+.col-md-3 {
+  width: 20% !important;
+  margin-bottom: 30px !important;
+}
+#searchWord {
+  margin-bottom: 20px;
+}
+
+.page-item {
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: sandybrown !important;
+  border-color: sandybrown !important;
+}
+
+.form-control {
+  max-width: 50%;
+}
+
+.page-link {
+  background-color: black !important;
+  color: wheat !important;
 }

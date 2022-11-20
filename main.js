@@ -1,54 +1,67 @@
-const apiKey = "EtabGNTDzqYExiuCoCeB2oFE0FXu3bZG";
-const city = document.querySelector("#select__city");
-const showMeTheWeather = document.querySelector("#btn");
-const p = document.querySelector("#weather");
-const weatherOfTheCity = {
-  Lviv: 324561,
-  Kyiv: 324505,
-  Kharkiv: 323903,
-  Chernihiv: 322162,
-  Odesa: 325343,
-  Mariupol: 323037,
-  Poltava: 325523,
-  Zhytomyr: 326609,
-  Cherkasy: 321985,
-  London: 328328,
-  Warsaw: 274663,
-  "New York": 349727,
-};
+const apiKey = "6d29bbab";
 
-function loadData() {
-  const xhttp = new XMLHttpRequest();
-
-  xhttp.open(
-    "GET",
-    `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${
-      weatherOfTheCity[city.value]
-    }?apikey=${apiKey}`
-  );
-  xhttp.send();
-
-  xhttp.onload = function () {
-    if (this.readyState === 4 && this.status === 200) {
-      const result = JSON.parse(this.response);
-      p.innerHTML = `<h1> ${city.value}</h1>`;
-      result.DailyForecasts.forEach((value) => {
-        const tempMin = Math.round(
-          ((value.Temperature.Minimum.Value - 32) * 5) / 9
-        );
-        const tempMax = Math.round(
-          ((value.Temperature.Maximum.Value - 32) * 5) / 9
-        );
-        const date = new Date(value.Date);
-        p.innerHTML += `<span class="date">${date.toLocaleDateString(
-          "en-UK"
-        )}</span><p class="temp"> ${tempMin}°... ${tempMax}° </p><h4 class="cloudiness"> <span class="day__night">Day:</span> ${
-          value.Day.IconPhrase
-        }</h4> <h4 class="cloudiness"><span class="day__night">Night:</span> ${
-          value.Night.IconPhrase
-        }</h4>`;
-      });
-    } else alert("Error, invalid status, please check");
-  };
+document.getElementById("form-submit").addEventListener("submit", getIp);
+let page = 1;
+let searchWord = document.getElementById("searchWord");
+function getIp(e) {
+  e.preventDefault();
+  let iVal = searchWord.value;
+  search(iVal, page);
 }
-showMeTheWeather.addEventListener("click", loadData);
+
+function search(ip, page) {
+  let url = `https://www.omdbapi.com/?s=${ip}&page=${page}&apikey=${apiKey}`;
+
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      let Res = "";
+      let output = "";
+      data.Search.forEach((result) => {
+        let poster = result.Poster ? result.Poster : "";
+        output += `<div class="col-md-3">
+        <div class="card">
+          <img class="card-img-top" src="${poster}" alt="Poster">
+          <div class="card-body">
+            <h6 class="card-title">${result.Title} ${result.Year}</h6>
+            <a class="btn btn-primary" onclick="showMore()">Show more</a>
+          </div>
+        </div>
+         </div>`;
+        Res += `<h6 class="card-title">${result.Title} ${result.Type}</h6>`;
+        document.getElementById("results").innerHTML = Res;
+      });
+
+      output += `
+  <div class="container mt-5">
+    <div class="row">
+  <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item" id="previous"><a class="page-link" onclick="previous()">Previous</a></li>
+    <li class="page-item" id="next"><a class="page-link" onclick="next()">Next</a></li>
+  </ul>
+  </nav>
+  </div>
+  </div>
+      `;
+      document.getElementById("results").innerHTML = output;
+    });
+}
+
+function next() {
+  document.getElementById("results").innerHTML = "";
+  let iVal = searchWord.value;
+  page++;
+  search(iVal, page);
+}
+
+function previous() {
+  let iVal = searchWord.value;
+  if (page != 1) {
+    document.getElementById("results").innerHTML = "";
+    page--;
+    search(iVal, page);
+  } else {
+    page = 1;
+  }
+}
