@@ -38,3 +38,26 @@ body {
   background-color: black !important;
   color: wheat !important;
 }
+
+.posterImg {
+  width: 301px !important;
+  height: 350px;
+  padding-bottom: 15px;
+}
+
+.paragraph {
+  width: 50% !important;
+  color: sandybrown;
+  font-weight: 600;
+}
+
+.plot,
+.director,
+.boxOffice,
+.IMDB,
+.Runtime,
+.Genre,
+.Actors,
+.Country {
+  color: #000202;
+}
